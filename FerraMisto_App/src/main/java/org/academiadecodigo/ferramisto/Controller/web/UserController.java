@@ -1,8 +1,11 @@
-package org.academiadecodigo.ferramisto.dto;
+package org.academiadecodigo.ferramisto.Controller.web;
 
+import org.academiadecodigo.ferramisto.dto.UserDto;
+import org.academiadecodigo.ferramisto.dto.UserDtoToUser;
+import org.academiadecodigo.ferramisto.dto.UserToUserDto;
 import org.academiadecodigo.ferramisto.exceptions.AssociationExistsException;
 import org.academiadecodigo.ferramisto.exceptions.UserNotFoundException;
-import org.academiadecodigo.ferramisto.exceptions.JavaBankException;
+
 import org.academiadecodigo.ferramisto.persistence.models.User;
 import org.academiadecodigo.ferramisto.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +53,7 @@ public class UserController {
 
 
     @RequestMapping(method = RequestMethod.GET, path = {"/list", "/", ""})
-    public String listCustomers(Model model){
+    public String listUsers(Model model){
         model.addAttribute("users", userToUserDto.convert(userService.list()));
         return "users/list";
     }
@@ -62,21 +65,21 @@ public class UserController {
      * @return the view to render
      */
     @RequestMapping(method = RequestMethod.GET, path = "/add")
-    public String addCustomer(Model model) {
+    public String addUser(Model model) {
         model.addAttribute("customer", new UserDto());
-        return "customer/add-update";
+        return "users/add-update";
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}/edit")
-    public String editCustomer(@PathVariable Integer id, Model model) throws UserNotFoundException {
+    public String editUser(@PathVariable Integer id, Model model) {
         model.addAttribute("customer", userToUserDto.convert(userService.get(id)));
         return "users/add-update";
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    public String showCustomer(@PathVariable Integer id, Model model) throws JavaBankException {
+    public String showUser(@PathVariable Integer id, Model model) {
 
         User customer = userService.get(id);
 
@@ -87,34 +90,34 @@ public class UserController {
 
 
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""}, params = "action=save")
-    public String saveCustomer(@Valid @ModelAttribute("customer") UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws UserNotFoundException {
+    public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws UserNotFoundException {
 
         System.out.println(bindingResult.getModel());
 
         if (bindingResult.hasErrors()) {
-            return "customer/add-update";
+            return "user/add-update";
         }
 
         User savedCustomer = userService.save(userDtoToUser.convert(userDto));
 
         redirectAttributes.addFlashAttribute("lastAction", "Saved " + savedCustomer.getFirstName() + " " + savedCustomer.getLastName());
-        return "redirect:/customer/" + savedCustomer.getId();
+        return "redirect:/user/" + savedCustomer.getId();
     }
 
 
     @RequestMapping(method = RequestMethod.POST, path = {"/", ""}, params = "action=cancel")
-    public String cancelSaveCustomer() {
+    public String cancelSaveUser() {
         // we could use an anchor tag in the view for this, but we might want to do something clever in the future here
-        return "redirect:/customer/";
+        return "redirect:/user/";
     }
 
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}/delete")
-    public String deleteCustomer(@PathVariable Integer id, RedirectAttributes redirectAttributes) throws UserNotFoundException, AssociationExistsException {
+    public String deleteUser(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         User customer = userService.get(id);
         userService.delete(id);
         redirectAttributes.addFlashAttribute("lastAction", "Deleted " + customer.getFirstName() + " " + customer.getLastName());
-        return "redirect:/customer";
+        return "redirect:/user";
     }
 
 }

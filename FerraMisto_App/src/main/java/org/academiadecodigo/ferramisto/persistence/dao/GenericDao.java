@@ -1,6 +1,7 @@
 package org.academiadecodigo.ferramisto.persistence.dao;
 
 import org.academiadecodigo.ferramisto.persistence.models.Model;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,6 +9,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+@Repository
 public abstract class GenericDao<T extends Model> implements Dao<T> {
 
 
