@@ -1,6 +1,4 @@
-package org.academiadecodigo.ferramisto.model;
-
-import org.springframework.stereotype.Component;
+package org.academiadecodigo.ferramisto.persistence.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

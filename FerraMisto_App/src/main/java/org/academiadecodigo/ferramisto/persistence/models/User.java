@@ -1,6 +1,4 @@
-package org.academiadecodigo.ferramisto.model;
-
-import net.bytebuddy.asm.Advice;
+package org.academiadecodigo.ferramisto.persistence.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User extends AbstractModel{
+public class User extends AbstractModel {
     @OneToMany(
             cascade = {CascadeType.ALL},
 

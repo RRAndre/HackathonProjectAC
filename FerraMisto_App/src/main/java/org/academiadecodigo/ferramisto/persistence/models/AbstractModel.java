@@ -1,4 +1,4 @@
-package org.academiadecodigo.ferramisto.model;
+package org.academiadecodigo.ferramisto.persistence.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @MappedSuperclass
-public abstract class AbstractModel {
+public abstract class AbstractModel implements Model {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
