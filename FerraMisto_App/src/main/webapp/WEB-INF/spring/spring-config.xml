@@ -5,7 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <bean class="org.academiadecodigo.ferramisto.SpringBootstrap"/>
-
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="locations" value="classpath:ferramisto.properties"/>
+    </bean>
     <!-- Use spring servlet for all requests, including static resources -->
     <mvc:default-servlet-handler/>
 
@@ -16,7 +18,7 @@
     <context:component-scan base-package="org.academiadecodigo.ferramisto"/>
 
     <mvc:interceptors>
-        <bean class="org.academiadecodigo.ferramisto.interceptor.LogRequestsInterceptor"/>
+        <bean class="org.academiadecodigo.ferramisto.LogRequestsInterceptor"/>
     </mvc:interceptors>
 
     <import resource="persistence.xml"/>

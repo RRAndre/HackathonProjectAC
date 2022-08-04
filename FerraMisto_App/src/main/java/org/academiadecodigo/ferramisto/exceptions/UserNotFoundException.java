@@ -1,0 +1,14 @@
+package org.academiadecodigo.ferramisto.exceptions;
+
+/**
+ * Thrown to indicate that the customer was not found
+ */
+public class UserNotFoundException extends NotFoundException {
+
+    /**
+     * @see NotFoundException#NotFoundException(String)
+     */
+    public UserNotFoundException() {
+        super("User not found");
+    }
+}
