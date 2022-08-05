@@ -1,12 +1,15 @@
 package org.academiadecodigo.ferramisto.persistence.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
 public class User extends AbstractModel {
+
     @OneToMany(
             cascade = {CascadeType.ALL},
 
@@ -22,6 +25,9 @@ public class User extends AbstractModel {
     )
     private List<Supporters> supportersList = new ArrayList<>();
 
+    @OneToOne
+    private Letter letter;
+
     public void addSupporter(Supporters supporters){
         supportersList.add(supporters);
         supporters.setUser(this);
@@ -29,6 +35,22 @@ public class User extends AbstractModel {
     public void removeSupporter(Supporters supporters){
         supportersList.remove(supporters);
         supporters.setUser(null);
+    }
+
+    public List<Supporters> getSupportersList() {
+        return supportersList;
+    }
+
+    public void setSupportersList(List<Supporters> supportersList) {
+        this.supportersList = supportersList;
+    }
+
+    public Letter getLetter() {
+        return letter;
+    }
+
+    public void setLetter(Letter letter) {
+        this.letter = letter;
     }
 
     @Override

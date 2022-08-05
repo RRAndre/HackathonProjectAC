@@ -18,8 +18,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/user")
 public class RestCustomerController {
     private UserService userService;
@@ -51,7 +52,7 @@ public class RestCustomerController {
         return new ResponseEntity<>(userToUserDto.convert(user), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = {"/", ""})
+    @RequestMapping(method = RequestMethod.POST, path = {"/add", ""})
     public ResponseEntity<?> addUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
         if (bindingResult.hasErrors() || userDto.getId() != null) {
@@ -60,10 +61,9 @@ public class RestCustomerController {
 
         User savedUser = userService.save(userDtoToUser.convert(userDto));
 
-        // get help from the framework building the path for the newly created resource
-        UriComponents uriComponents = uriComponentsBuilder.path("/api/customer/" + savedUser.getId()).build();
-
+        UriComponents uriComponents = uriComponentsBuilder.path("/api/user" + savedUser.getId()).build();
         // set headers with the created path
+
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(uriComponents.toUri());
 

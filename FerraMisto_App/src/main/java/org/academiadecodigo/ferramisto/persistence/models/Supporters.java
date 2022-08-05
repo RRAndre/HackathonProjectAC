@@ -8,8 +8,10 @@ import javax.persistence.Table;
 @Table(name = "Supporters")
 public class Supporters extends AbstractModel {
 
-    @ManyToOne
+    @ManyToOne //TODO os nossos users é que são many to one supporter. Esta anotação deveria ser OneToMany
     private User user;
+
+
 
     public User getUser() {
         return user;
