@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/supporters")
 public class SupporterController {
     private UserService userService;
     private SupporterService supporterService;
@@ -48,22 +48,22 @@ public class SupporterController {
         this.userToUserDto = userToUserDto;
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = {"/{cid}/supporter"})
-    public String addSupporter(@PathVariable Integer cid, @Valid @ModelAttribute("supporter") SupporterDto supporterDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws Exception {
+    @RequestMapping(method = RequestMethod.POST, path = {"/{id}/supporter"})
+    public String addSupporter(@PathVariable Integer id, @Valid @ModelAttribute("supporter") SupporterDto supporterDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws Exception {
 
         if (bindingResult.hasErrors()) {
-            return "redirect:/user/" + cid;
+            return "redirect:/supporters/" + id;
         }
 
         try {
             Supporters supporter = supporterDtoToSupporter.convert((supporterDto));
-            userService.addSupporter(cid, supporter);
+            userService.addSupporter(id, supporter);
             //TODO: apaguei aqui uma linha
-            return "redirect:/customer/" + cid;
+            return "redirect:/supporters/" + id;
 
         } catch (Exception ex) {
             redirectAttributes.addFlashAttribute("failure", "Savings account must have a minimum value of 100 at all times");
-            return "redirect:/user/" + cid;
+            return "redirect:/supporters/" + id;
         }
     }
 }
