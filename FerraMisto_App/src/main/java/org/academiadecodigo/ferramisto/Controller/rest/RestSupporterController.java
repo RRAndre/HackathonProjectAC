@@ -19,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -29,6 +30,8 @@ public class RestSupporterController {
     private SupporterService supporterService;
     private SupporterToSupporterDto supporterToSupporterDto;
     private SupporterDtoToSupporter supporterDtoToSupporter;
+
+
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -47,7 +50,17 @@ public class RestSupporterController {
         this.supporterDtoToSupporter = supporterDtoToSupporter;
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{id}/supporters/")
+    @RequestMapping(method = RequestMethod.GET, path = {"/all", ""})
+    public ResponseEntity<List<SupporterDto>> listSupporters() {
+
+        List<SupporterDto> supporterDto = supporterService.list().stream()
+                .map(supporters -> supporterToSupporterDto.convert(supporters))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(supporterDto, HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<SupporterDto> showSupporter(@PathVariable Integer id){
         Supporters supporter = supporterService.get(id);
 
@@ -57,7 +70,7 @@ public class RestSupporterController {
         return new ResponseEntity<>(supporterToSupporterDto.convert(supporter), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = {"{id}/supporters"})
+    @RequestMapping(method = RequestMethod.POST, path = {"/add"})
     public ResponseEntity<?> addSupporter(@Valid @RequestBody SupporterDto supporterDto, BindingResult bindingResult, UriComponentsBuilder uriComponentsBuilder) {
 
         if (bindingResult.hasErrors() || supporterDto.getId() != null) {
@@ -75,7 +88,7 @@ public class RestSupporterController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/{i d}")
+    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
     public ResponseEntity<SupporterDto> editSupporter(@Valid @RequestBody SupporterDto supporterDto, BindingResult bindingResult, @PathVariable Integer id) {
 
         if (bindingResult.hasErrors()){
@@ -104,7 +117,6 @@ public class RestSupporterController {
         //TODO: aplicaar aqui os caatchs que apagámos porque estavam a dar erro
     }
 }
-
 
 
 

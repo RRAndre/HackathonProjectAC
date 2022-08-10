@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FerraMisto_App" />
+        <module name="Letters_Bangkok_API" />
       </profile>
     </annotationProcessing>
   </component>

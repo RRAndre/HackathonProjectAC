@@ -22,6 +22,8 @@ public abstract class AbstractModel implements Model {
 
     private String phone;
 
+    private String message;
+
     public Integer getId() {
         return id;
     }
@@ -63,4 +65,11 @@ public abstract class AbstractModel implements Model {
     }
 
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }

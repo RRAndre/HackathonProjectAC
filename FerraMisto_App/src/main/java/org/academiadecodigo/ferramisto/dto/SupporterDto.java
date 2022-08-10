@@ -23,6 +23,18 @@ public class SupporterDto {
     @Size(min = 9, max = 16)
     private String phone;
 
+    @NotBlank(message = "message is mandatory")
+    @Size(min = 10, max=1000)
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     /**
      * Gets the id of the customer DTO
      *

@@ -1,8 +1,13 @@
 package org.academiadecodigo.ferramisto.dto;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
 
 public class UserDto {
+
+
     private Integer id;
 
     @NotNull(message = "First name is mandatory")
@@ -22,6 +27,19 @@ public class UserDto {
     @Pattern(regexp = "^\\+?[0-9]*$", message = "Phone number contains invalid characters")
     @Size(min = 9, max = 16)
     private String phone;
+
+    @NotBlank(message = "message is mandatory")
+    @Size(min = 10, max=1000)
+    private String message;
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+
 
     public Integer getId() {
         return id;

@@ -14,6 +14,7 @@ public class SupporterToSupporterDto extends AbstractConverter<Supporters, Suppo
         supporterDto.setLastName(supporter.getLastName());
         supporterDto.setEmail(supporter.getEmail());
         supporterDto.setPhone(supporter.getEmail());
+        supporterDto.setMessage(supporter.getMessage());
         return supporterDto;
     }
 }

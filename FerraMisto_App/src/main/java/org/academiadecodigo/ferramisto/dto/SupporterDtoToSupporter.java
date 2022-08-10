@@ -16,6 +16,7 @@ public class SupporterDtoToSupporter implements Converter<SupporterDto, Supporte
         supporter.setLastName(supporterDto.getLastName());
         supporter.setEmail(supporterDto.getEmail());
         supporter.setPhone(supporterDto.getPhone());
+        supporter.setMessage(supporterDto.getMessage());
 
         return supporter;
     }

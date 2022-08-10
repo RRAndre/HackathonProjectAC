@@ -3,10 +3,11 @@ package org.academiadecodigo.ferramisto.services;
 import org.academiadecodigo.ferramisto.persistence.dao.SupportersDao;
 import org.academiadecodigo.ferramisto.persistence.models.Supporters;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-
+@Service
 public class SupporterServiceImpl implements SupporterService {
 
     private SupportersDao supportersDao;

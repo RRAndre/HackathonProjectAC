@@ -25,6 +25,8 @@ public class User extends AbstractModel {
     )
     private List<Supporters> supportersList = new ArrayList<>();
 
+
+
     @OneToOne
     private Letter letter;
 

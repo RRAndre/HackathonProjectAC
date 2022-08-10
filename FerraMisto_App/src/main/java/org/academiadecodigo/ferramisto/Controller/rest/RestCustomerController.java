@@ -22,7 +22,7 @@ import javax.validation.Valid;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/user")
-public class RestCustomerController {
+public class    RestCustomerController {
     private UserService userService;
     private UserDtoToUser userDtoToUser;
     private UserToUserDto userToUserDto;
@@ -41,6 +41,8 @@ public class RestCustomerController {
     public void setUserToUserDto(UserToUserDto userToUserDto) {
         this.userToUserDto = userToUserDto;
     }
+
+
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<UserDto> showUser(@PathVariable Integer id){

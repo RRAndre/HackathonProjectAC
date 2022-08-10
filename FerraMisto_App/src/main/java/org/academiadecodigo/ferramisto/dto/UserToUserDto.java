@@ -11,11 +11,12 @@ public class UserToUserDto extends AbstractConverter<User, UserDto>{
     @Override
     public UserDto convert(User user) {
         UserDto userDto = new UserDto();
-        userDto.setId(userDto.getId());
+        userDto.setId(user.getId());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
-        user.setPhone(user.getPhone());
+        userDto.setPhone(user.getPhone());
+        userDto.setMessage(user.getMessage());
 
         return userDto;
     }
