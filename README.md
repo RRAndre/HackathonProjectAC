@@ -1,0 +1,2 @@
+# HackatonProjectAC
+The actual final project is in the branch Intermediate. This was a project done by my group in the 24h hackathon at Academia de Código, marking the end of the 3 month Bootcamp. Some of the text in the website was put there with the intent of bringing some humor to the presentations at the end of the 24 hours, but the core subject of the project was the lack of freedom of speech of women in Thailand. The topic was given to us by our trainers, and was part of the lyrics of a Thai song. 
